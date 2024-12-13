@@ -1,11 +1,16 @@
 package pairmatching;
 
 import static pairmatching.view.input.Choice.QUIT;
+import static pairmatching.view.input.Choice.RESET;
 
+import pairmatching.domain.Pairs;
 import pairmatching.view.InputView;
+import pairmatching.view.OutputView;
 import pairmatching.view.input.Choice;
 
 public class ApplicationFacade {
+
+    private static final Pairs PAIRS = Pairs.getInstance();
 
     public static void run() {
         while (true) {
@@ -19,6 +24,9 @@ public class ApplicationFacade {
     }
 
     private static void handleChoice(Choice choice) {
-        //todo : 구현
+        if (choice == RESET) {
+            PAIRS.reset();
+            OutputView.printReset();
+        }
     }
 }

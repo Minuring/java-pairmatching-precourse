@@ -18,7 +18,7 @@ public class OutputView {
         );
     }
 
-    public static void printResult() {
-        System.out.println("bye");
+    public static void printReset() {
+        System.out.println("\n초기화 되었습니다.");
     }
 }
