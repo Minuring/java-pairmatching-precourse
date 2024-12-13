@@ -1,6 +1,7 @@
 package pairmatching.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Pair {
@@ -26,6 +27,10 @@ public class Pair {
             }
         }
         return count >= 2;
+    }
+
+    public List<Crew> getCrews() {
+        return Collections.unmodifiableList(crews);
     }
 
     @Override
