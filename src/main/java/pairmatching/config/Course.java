@@ -1,6 +1,6 @@
 package pairmatching.config;
 
-public enum Course {
+public enum Course implements NameSupplier {
     BACKEND("백엔드"),
     FRONTEND("프론트엔드");
 
@@ -8,5 +8,9 @@ public enum Course {
 
     Course(String name) {
         this.name = name;
+    }
+
+    public String getName() {
+        return name;
     }
 }

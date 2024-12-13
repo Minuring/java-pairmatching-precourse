@@ -1,6 +1,6 @@
 package pairmatching.config;
 
-public enum Level {
+public enum Level implements NameSupplier {
     LEVEL1("레벨1"),
     LEVEL2("레벨2"),
     LEVEL3("레벨3"),
@@ -11,5 +11,9 @@ public enum Level {
 
     Level(String name) {
         this.name = name;
+    }
+
+    public String getName() {
+        return name;
     }
 }

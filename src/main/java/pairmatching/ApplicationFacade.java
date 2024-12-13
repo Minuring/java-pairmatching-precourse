@@ -27,6 +27,8 @@ public class ApplicationFacade {
         if (choice == RESET) {
             PAIRS.reset();
             OutputView.printReset();
+            return;
         }
+        OutputView.printBoard();
     }
 }
