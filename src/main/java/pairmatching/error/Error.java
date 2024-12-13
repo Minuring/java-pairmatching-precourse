@@ -17,7 +17,7 @@ public enum Error {
 
     public String message(Object... args) {
         try {
-            return String.format(message, args);
+            return String.format("[ERROR] " + message, args);
         } catch (IllegalFormatException e) {
             System.err.printf("[message] %s [args] %s", message, Arrays.toString(args));
             throw e;
