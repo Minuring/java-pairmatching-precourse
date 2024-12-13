@@ -10,7 +10,7 @@ public class Execution {
             try {
                 runnable.run();
                 break;
-            } catch (IllegalArgumentException e) {
+            } catch (IllegalArgumentException | IllegalStateException e) {
                 OutputView.printErrorMessage(e.getMessage());
             }
         }

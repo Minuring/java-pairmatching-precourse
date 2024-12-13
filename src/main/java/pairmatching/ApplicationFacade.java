@@ -67,7 +67,8 @@ public class ApplicationFacade {
         TriInput triInput = InputView.readTarget();
 
         if (PAIRS.hasMatched(triInput.course(), triInput.level(), triInput.mission())) {
-            List<Pair> pairs = PAIRS.getPairs(triInput.course(), triInput.level(), triInput.mission());
+            List<Pair> pairs = PAIRS.getPairs(triInput.course(), triInput.level(),
+                triInput.mission());
             OutputView.printResult(pairs);
             return;
         }
@@ -83,8 +84,16 @@ public class ApplicationFacade {
                 return;
             }
         }
-        matcher.match(triInput.course(), triInput.level(), triInput.mission());
-        List<Pair> pairs = PAIRS.getPairs(triInput.course(), triInput.level(), triInput.mission());
-        OutputView.printResult(pairs);
+        match(triInput);
+    }
+
+    private static void match(TriInput triInput) {
+        try {
+            matcher.match(triInput.course(), triInput.level(), triInput.mission());
+            List<Pair> pairs = PAIRS.getPairs(triInput.course(), triInput.level(), triInput.mission());
+            OutputView.printResult(pairs);
+        } catch (IllegalStateException e) {
+            OutputView.printErrorMessage(e.getMessage());
+        }
     }
 }
