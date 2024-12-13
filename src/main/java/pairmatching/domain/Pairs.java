@@ -48,17 +48,8 @@ public class Pairs {
     }
 
     public List<Pair> getPairs(Course course, Level level, Mission mission) {
-        if (!pairs.containsKey(course)) {
-            return Collections.emptyList();
-        }
         Map<Level, Map<Mission, List<Pair>>> levelMissions = pairs.get(course);
-        if (!levelMissions.containsKey(level)) {
-            return Collections.emptyList();
-        }
         Map<Mission, List<Pair>> missionPairs = levelMissions.get(level);
-        if (!missionPairs.containsKey(mission)) {
-            return Collections.emptyList();
-        }
         return missionPairs.get(mission);
     }
 
