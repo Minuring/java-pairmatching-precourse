@@ -2,6 +2,7 @@ package pairmatching.config;
 
 import java.util.Arrays;
 import java.util.List;
+import pairmatching.error.Error;
 
 public enum Mission implements NameSupplier {
     RACING(Level.LEVEL1, "자동차경주"),
@@ -27,9 +28,20 @@ public enum Mission implements NameSupplier {
         return name;
     }
 
+    public boolean isLevel(Level level) {
+        return this.level == level;
+    }
+
     public static List<Mission> ofLevel(Level level) {
         return Arrays.stream(values())
             .filter(mission -> mission.level == level)
             .toList();
+    }
+
+    public static Mission ofName(String name) {
+        return Arrays.stream(values())
+            .filter(mission -> mission.name.equals(name))
+            .findAny()
+            .orElseThrow(() -> new IllegalArgumentException(Error.BAD_INPUT.message()));
     }
 }

@@ -14,19 +14,23 @@ public abstract class FileLoader<T> {
         this.path = path;
     }
 
-    public List<T> read() throws IOException {
-        BufferedReader br = createBufferedReader();
-
-        List<T> results = new ArrayList<>();
-        while (true) {
-            String line = br.readLine();
-            if (line == null) {
-                break;  // 더 이상 읽을 라인이 없을 경우 while 문을 빠져나간다.
+    public List<T> read() {
+        try {
+            BufferedReader br = createBufferedReader();
+            List<T> results = new ArrayList<>();
+            while (true) {
+                String line = br.readLine();
+                if (line == null) {
+                    break;  // 더 이상 읽을 라인이 없을 경우 while 문을 빠져나간다.
+                }
+                results.add(bindLine(line));
             }
-            results.add(bindLine(line));
+            br.close();
+            return results;
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new RuntimeException();
         }
-        br.close();
-        return results;
     }
 
     private BufferedReader createBufferedReader() throws IOException {
