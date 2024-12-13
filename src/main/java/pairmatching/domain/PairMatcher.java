@@ -53,11 +53,11 @@ public class PairMatcher {
         List<Pair> pairs = new ArrayList<>();
         int index = 0;
         int remains = shuffled.size();
-        while (remains > 0) {
+        while (remains > 1) {
             String first = shuffled.get(index++);
             String second = shuffled.get(index++);
             String third = null;
-            remains -= index;
+            remains -= 2;
             if (remains == 1) {
                 third = shuffled.get(index);
             }

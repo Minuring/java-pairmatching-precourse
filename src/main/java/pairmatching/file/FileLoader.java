@@ -35,7 +35,6 @@ public abstract class FileLoader<T> {
 
     private BufferedReader createBufferedReader() throws IOException {
         BufferedReader br = new BufferedReader(new FileReader(path));
-        br.readLine(); //맨 첫줄 버림
         return br;
     }
 
