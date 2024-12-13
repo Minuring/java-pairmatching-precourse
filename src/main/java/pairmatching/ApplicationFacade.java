@@ -64,6 +64,7 @@ public class ApplicationFacade {
         if (PAIRS.hasMatched(triInput.course(), triInput.level(), triInput.mission())) {
             System.out.println("ApplicationFacade.handleMatch - hasMatched");
             if (!InputView.readRematch()) {
+                handleChoice(MATCH);
                 return;
             }
         }
