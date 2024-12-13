@@ -49,21 +49,6 @@ public class PairMatcher {
     }
 
 
-    private boolean hasDuplicatedPairInSameLevel(List<Pair> generatedPairs, Course course, Level level) {
-        List<Mission> missions = Mission.ofLevel(level);
-        for (Mission mission : missions) {
-            List<Pair> savedPairs = PAIRS.getPairs(course, level, mission);
-
-            boolean overlapped = savedPairs.stream()
-                .anyMatch(savedPair -> generatedPairs.stream()
-                    .anyMatch(savedPair::isOverlapped));
-            if (overlapped) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     private List<Pair> createPairs(List<Crew> crews, List<String> shuffled) {
         List<Pair> pairs = new ArrayList<>();
         int index = 0;
@@ -79,6 +64,21 @@ public class PairMatcher {
             pairs.add(createPair(crews, first, second, third));
         }
         return pairs;
+    }
+
+    private boolean hasDuplicatedPairInSameLevel(List<Pair> generatedPairs, Course course, Level level) {
+        List<Mission> missions = Mission.ofLevel(level);
+        for (Mission mission : missions) {
+            List<Pair> savedPairs = PAIRS.getPairs(course, level, mission);
+
+            boolean overlapped = savedPairs.stream()
+                .anyMatch(savedPair -> generatedPairs.stream()
+                    .anyMatch(savedPair::isOverlapped));
+            if (overlapped) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private Pair createPair(List<Crew> crews, String name1, String name2, String name3) {

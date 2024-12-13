@@ -8,6 +8,7 @@ import static pairmatching.view.input.Choice.RESET;
 
 import java.util.List;
 import pairmatching.domain.Crew;
+import pairmatching.domain.Pair;
 import pairmatching.domain.PairMatcher;
 import pairmatching.domain.Pairs;
 import pairmatching.file.CourseCrewLoader;
@@ -61,11 +62,13 @@ public class ApplicationFacade {
         TriInput triInput = InputView.readTarget();
 
         if (PAIRS.hasMatched(triInput.course(), triInput.level(), triInput.mission())) {
+            System.out.println("ApplicationFacade.handleMatch - hasMatched");
             if (!InputView.readRematch()) {
                 return;
             }
-            // 덮어쓰기
         }
         matcher.match(triInput.course(), triInput.level(), triInput.mission());
+        List<Pair> pairs = PAIRS.getPairs(triInput.course(), triInput.level(), triInput.mission());
+        OutputView.printResult(pairs);
     }
 }

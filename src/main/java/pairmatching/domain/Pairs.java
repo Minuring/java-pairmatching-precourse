@@ -63,7 +63,8 @@ public class Pairs {
     }
 
     public void save(Course course, Level level, Mission mission, List<Pair> result) {
-        List<Pair> pairs = getPairs(course, level, mission);
-        pairs = result;
+        Map<Level, Map<Mission, List<Pair>>> levelMissions = this.pairs.get(course);
+        Map<Mission, List<Pair>> missionPairs = levelMissions.get(level);
+        missionPairs.replace(mission, result);
     }
 }

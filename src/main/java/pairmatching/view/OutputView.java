@@ -7,6 +7,7 @@ import pairmatching.config.Course;
 import pairmatching.config.Level;
 import pairmatching.config.Mission;
 import pairmatching.config.NameSupplier;
+import pairmatching.domain.Pair;
 
 public class OutputView {
 
@@ -37,5 +38,14 @@ public class OutputView {
         return "" + Arrays.stream(enumValues)
             .map(NameSupplier::getName)
             .collect(Collectors.joining(" | "));
+    }
+
+    public static void printResult(List<Pair> pairs) {
+        System.out.println("\n페어 매칭 결과입니다.");
+        String text = pairs.stream()
+            .map(Pair::toString)
+            .collect(Collectors.joining("\n"));
+        System.out.println(text);
+        System.out.println();
     }
 }
