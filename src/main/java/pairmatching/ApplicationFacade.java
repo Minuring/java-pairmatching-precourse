@@ -3,6 +3,7 @@ package pairmatching;
 import static pairmatching.config.Course.BACKEND;
 import static pairmatching.config.Course.FRONTEND;
 import static pairmatching.view.input.Choice.MATCH;
+import static pairmatching.view.input.Choice.QUERY;
 import static pairmatching.view.input.Choice.QUIT;
 import static pairmatching.view.input.Choice.RESET;
 
@@ -11,6 +12,7 @@ import pairmatching.domain.Crew;
 import pairmatching.domain.Pair;
 import pairmatching.domain.PairMatcher;
 import pairmatching.domain.Pairs;
+import pairmatching.error.Error;
 import pairmatching.file.CourseCrewLoader;
 import pairmatching.view.InputView;
 import pairmatching.view.OutputView;
@@ -56,15 +58,28 @@ public class ApplicationFacade {
         if (choice == MATCH) {
             handleMatch();
         }
+        if (choice == QUERY) {
+            handleQuery();
+        }
+    }
+
+    private static void handleQuery() {
+        TriInput triInput = InputView.readTarget();
+
+        if (PAIRS.hasMatched(triInput.course(), triInput.level(), triInput.mission())) {
+            List<Pair> pairs = PAIRS.getPairs(triInput.course(), triInput.level(), triInput.mission());
+            OutputView.printResult(pairs);
+            return;
+        }
+        OutputView.printErrorMessage(Error.MATCH_NOT_FOUND.message());
     }
 
     private static void handleMatch() {
         TriInput triInput = InputView.readTarget();
 
         if (PAIRS.hasMatched(triInput.course(), triInput.level(), triInput.mission())) {
-            System.out.println("ApplicationFacade.handleMatch - hasMatched");
             if (!InputView.readRematch()) {
-                handleChoice(MATCH);
+                handleMatch();
                 return;
             }
         }
